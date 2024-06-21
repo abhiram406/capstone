@@ -29,9 +29,9 @@ def app():
         result = model.predict(opencv_image)
         for r in result:
             
-            #res_plotted = r[0].plot()
+            res_plotted = r[0].plot()
             #res_plotted = r.plot()[:, :, ::-1]
-            st.write(r[0])
+            #st.write(r[0])
             st.image(res_plotted,
                     caption="Uploaded Image",
                     use_column_width=True
