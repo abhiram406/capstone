@@ -34,7 +34,7 @@ def app():
             #res_plotted = r[0].plot()
             #cropped_image = opencv_image[int(y1):int(y2), int(x1):int(x2)]
             res_plotted = r.plot()[:, :, ::-1]
-            st.write(boxes[0])
+            st.write(boxes[0][0])
             #st.image(cropped_image,caption="Cropped Image",use_column_width=True)
 
 
