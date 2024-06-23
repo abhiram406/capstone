@@ -27,7 +27,7 @@ def app():
         model = YOLO('best.pt')
 
         result = model.predict(opencv_image)
-        boxes = r.boxes.xyxy.tolist()
+        boxes = result.boxes.xyxy.tolist()
         for r in result:
             
             x1, y1, x2, y2 = boxes
