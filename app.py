@@ -32,10 +32,10 @@ def app():
             
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
-            #cropped_image = opencv_image[int(y1):int(y2), int(x1):int(x2)]
+            cropped_image = opencv_image[int(y1):int(y2), int(x1):int(x2)]
             res_plotted = r.plot()[:, :, ::-1]
-            st.write(x1)
-            #st.image(cropped_image,caption="Cropped Image",use_column_width=True)
+            #st.write(x1)
+            st.image(cropped_image,caption="Cropped Image",use_column_width=True)
 
 
 
