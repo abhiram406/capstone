@@ -1,5 +1,5 @@
 import cv2
-import PIL
+import easyocr
 import streamlit as st
 import numpy as np
 from ultralytics import YOLO
@@ -34,7 +34,7 @@ def app():
             #res_plotted = r[0].plot()
             img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
 
-            cv2norm_img = np.zeros((img.shape[0], img.shape[1]))
+            norm_img = np.zeros((img.shape[0], img.shape[1]))
             img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
             img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)[1]
             img = cv2.GaussianBlur(img, (1, 1), 0)
@@ -43,6 +43,15 @@ def app():
             res_plotted = r.plot()[:, :, ::-1]
             #st.write(x1)
             st.image(img,caption="Cropped Image",use_column_width=True)
+
+            reader = easyocr.Reader(['en'])
+
+            # Read text from an image
+            result = reader.readtext(img)
+
+            # Print the extracted text
+            for detection in result:
+                st.write(detection[1])
 
 
 
