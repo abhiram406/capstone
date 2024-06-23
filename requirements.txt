@@ -1,6 +1,6 @@
 easyocr==1.7.1
 matplotlib==3.9.0
-numpy==2.0.0
+numpy
 opencv_python==4.10.0.84
 opencv_python_headless==4.10.0.84
 pytesseract==0.3.10
