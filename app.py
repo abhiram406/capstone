@@ -27,13 +27,16 @@ def app():
         model = YOLO('best.pt')
 
         result = model.predict(opencv_image)
+        boxes = r.boxes.xyxy.tolist()
         for r in result:
             
+            x1, y1, x2, y2 = boxes
             #res_plotted = r[0].plot()
+            cropped_image = opencv_image[int(y1):int(y2), int(x1):int(x2)]
             res_plotted = r.plot()[:, :, ::-1]
             #st.write(r[0])
-            st.image(res_plotted,
-                    caption="Uploaded Image",
+            st.image(cropped_image,
+                    caption="Cropped Image",
                     use_column_width=True
                     )
 
