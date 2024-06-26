@@ -4,7 +4,7 @@ import streamlit as st
 import numpy as np
 from ultralytics import YOLO
 
-def app():
+def application():
     st.header('Automatic Number Plate Detection')
     st.subheader('AIML Capstone Project - Group 3')
     #st.subheader('Powered by YOLOv8')
@@ -50,4 +50,4 @@ def app():
 
 
 if __name__ == "__main__":
-    app()
+    application()
