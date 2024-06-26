@@ -54,11 +54,11 @@ def application():
                 reader = easyocr.Reader(['en'])
 
             # Read text from an image
-                result = reader.readtext(img)
+                output = reader.readtext(img)
 
             # Print the extracted text
                 for detection in result:
-                    st.write(detection[1])
+                    st.write(output[1])
 
 
 if __name__ == "__main__":
