@@ -25,7 +25,7 @@ def application():
 
         with tab1:
             st.subheader("Uploaded Image")
-            st.image(opencv_image,channels = "RGB")
+            st.image(opencv_image,use_column_width=True)
         
         model = YOLO('best.pt')
 
@@ -37,7 +37,7 @@ def application():
             
             with tab2:
                 st.subheader("Original Image with Detected Number Plates")
-                st.image(r.plot())
+                st.image(r.plot(),use_column_width=True)
             
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
@@ -52,7 +52,8 @@ def application():
             
             #res_plotted = r.plot()[:, :, ::-1]
             with tab3:
-                st.image(img,caption="Cropped Image",use_column_width=True)
+                st.subheader("Cropped Number Plate")
+                st.image(img,use_column_width=True)
 
                 reader = easyocr.Reader(['en'])
 
