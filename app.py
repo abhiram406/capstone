@@ -7,10 +7,9 @@ from ultralytics import YOLO
 def application():
     st.header('Automatic Number Plate Detection')
     st.subheader('AIML Capstone Project - Group 3')
+    st.write('Instructions: Please upload images of cars in the given link and switch through the tabs to check if the number plate gets detected')
 
-    with st.sidebar:
-        
-        uploaded_file = st.file_uploader(label="Choose an image file",type=['png', 'jpg', 'jpeg'])
+    uploaded_file = st.file_uploader(label="Choose an image file",type=['png', 'jpg', 'jpeg'])
     
     tab1, tab2 = st.tabs(["Original", "Detected"])
     
