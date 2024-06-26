@@ -32,13 +32,15 @@ def app():
             
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
-            img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
-
             
-            norm_img = np.zeros((img.shape[0], img.shape[1]))
-            img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
-            img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)[1]
-            #img = cv2.GaussianBlur(img, (1, 1), 0)
+            img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = cv.medianBlur(img,5)
+            
+            #norm_img = np.zeros((img.shape[0], img.shape[1]))
+            #img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
+            #img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)[1]
+            img = cv2.adaptiveThreshold(img,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,11,2)
             
 
             
