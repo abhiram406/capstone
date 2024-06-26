@@ -38,7 +38,7 @@ def application():
             
             with tab2:
                 st.subheader("Original Image with Detected Number Plates")
-                st.image(r.plot()[:,:,::-1])
+                st.image(r.plot())
             
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
