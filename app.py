@@ -34,12 +34,12 @@ def app():
             #res_plotted = r[0].plot()
             img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
 
-            '''
-            norm_img = np.zeros((img.shape[0], img.shape[1]))
-            img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
-            img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)[1]
-            img = cv2.GaussianBlur(img, (1, 1), 0)
-            '''
+            
+            #norm_img = np.zeros((img.shape[0], img.shape[1]))
+            #img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
+            #img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)[1]
+            #img = cv2.GaussianBlur(img, (1, 1), 0)
+            
 
             
             res_plotted = r.plot()[:, :, ::-1]
