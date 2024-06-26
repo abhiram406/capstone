@@ -10,21 +10,32 @@ def application():
     #st.subheader('Powered by YOLOv8')
     st.write('Welcome!')
 
-    uploaded_file = st.file_uploader(label="Choose an image file",
+    with st.sidebar:
+        
+        uploaded_file = st.file_uploader(label="Choose an image file",
                  type=['png', 'jpg', 'jpeg'])
     
-
+    tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
+    
     if uploaded_file:
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         opencv_image = cv2.imdecode(file_bytes, 1)
+
+        with tab1:
+            st.subheader("Uploaded Image")
+            st.image(opencv_image)
         
         model = YOLO('best.pt')
 
         result = model.predict(opencv_image)
         st.write(result)
         boxes = result[0].boxes.xyxy.tolist()
+
+        
         for r in result:
-            
+            with tab2:
+                st.subheader("Original Image with Detected Number Plates")
+                st.image(r.plot()[:,:,::-1])
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
             
@@ -36,17 +47,18 @@ def application():
             img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
             img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)[1]
             
-            res_plotted = r.plot()[:, :, ::-1]
-            st.image(img,caption="Cropped Image",use_column_width=True)
+            #res_plotted = r.plot()[:, :, ::-1]
+            with tab3:
+                st.image(img,caption="Cropped Image",use_column_width=True)
 
-            reader = easyocr.Reader(['en'])
+                reader = easyocr.Reader(['en'])
 
             # Read text from an image
-            result = reader.readtext(img)
+                result = reader.readtext(img)
 
             # Print the extracted text
-            for detection in result:
-                st.write(detection[1])
+                for detection in result:
+                    st.write(detection[1])
 
 
 if __name__ == "__main__":
