@@ -62,7 +62,7 @@ def application():
 
             # Print the extracted text
                 for detection in output:
-                    st.write(output[1])
+                    st.write(detection[1])
 
 
 if __name__ == "__main__":
