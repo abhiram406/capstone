@@ -7,13 +7,10 @@ from ultralytics import YOLO
 def application():
     st.header('Automatic Number Plate Detection')
     st.subheader('AIML Capstone Project - Group 3')
-    #st.subheader('Powered by YOLOv8')
-    st.write('Welcome!')
 
     with st.sidebar:
         
-        uploaded_file = st.file_uploader(label="Choose an image file",
-                 type=['png', 'jpg', 'jpeg'])
+        uploaded_file = st.file_uploader(label="Choose an image file",type=['png', 'jpg', 'jpeg'])
     
     tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
     
@@ -63,7 +60,7 @@ def application():
             # Print the extracted text
                 for detection in output:
                     
-                    st.subheader('Number Plate: '+ detection[1])
+                    st.subheader('Number Plate: '+ (detection[1]).upper())
 
 
 if __name__ == "__main__":
