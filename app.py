@@ -23,7 +23,7 @@ def application():
 
         with tab1:
             st.subheader("Uploaded Image")
-            st.image(opencv_image)
+            st.image(opencv_image,channels = "BGR")
         
         model = YOLO('best.pt')
 
@@ -33,9 +33,11 @@ def application():
 
         
         for r in result:
+            
             with tab2:
                 st.subheader("Original Image with Detected Number Plates")
                 st.image(r.plot()[:,:,::-1])
+            
             x1, y1, x2, y2 = boxes[0]
             #res_plotted = r[0].plot()
             
