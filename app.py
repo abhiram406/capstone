@@ -30,7 +30,6 @@ def application():
         model = YOLO('best.pt')
 
         result = model.predict(opencv_image)
-        st.write(result)
         boxes = result[0].boxes.xyxy.tolist()
 
         
