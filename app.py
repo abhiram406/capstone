@@ -18,8 +18,10 @@ def application():
     tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
     
     if uploaded_file:
+        # Convert the file to an opencv image.
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         opencv_image = cv2.imdecode(file_bytes, 1)
+        opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB) 
 
         with tab1:
             st.subheader("Uploaded Image")
