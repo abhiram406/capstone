@@ -61,7 +61,7 @@ def application():
                 output = reader.readtext(img)
 
             # Print the extracted text
-                for detection in result:
+                for detection in output:
                     st.write(output[1])
 
 
