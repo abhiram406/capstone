@@ -23,7 +23,7 @@ def application():
 
         with tab1:
             st.subheader("Uploaded Image")
-            st.image(opencv_image,channels = "BGR")
+            st.image(opencv_image,channels = "RGB")
         
         model = YOLO('best.pt')
 
