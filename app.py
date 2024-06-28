@@ -50,10 +50,12 @@ def application():
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
-                numplate_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)[1]
-                kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]]) 
+                numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
+                
+                 
   
-                # Sharpen the image 
+                # Sharpen the image
+                kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
                 sharpened_image = cv2.filter2D(numplate_img, -1, kernel)
                 
 
@@ -64,6 +66,7 @@ def application():
             
             # Read text from an image
                 output = reader.readtext(sharpened_image)
+                output = reader.readtext(numplate_img)
 
             # Print the extracted text
                 for detection in output:
