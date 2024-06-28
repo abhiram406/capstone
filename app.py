@@ -1,4 +1,5 @@
 import cv2
+from cv2 import dnn_superres
 import easyocr
 import streamlit as st
 import numpy as np
