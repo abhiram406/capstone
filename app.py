@@ -63,7 +63,7 @@ def application():
 
             
             # Read text from an image
-                output = reader.readtext(sharpened_image)
+                #output = reader.readtext(sharpened_image)
                 output = reader.readtext(numplate_img)
 
             # Print the extracted text
