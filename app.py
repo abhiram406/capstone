@@ -11,7 +11,7 @@ def application():
 
     uploaded_file = st.file_uploader(label="Choose an image file",type=['png', 'jpg', 'jpeg'])
     
-    tab1, tab2 = st.tabs(["Original", "Detected"])
+    tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
     
     if uploaded_file:
         # Convert the file to an opencv image.
@@ -56,6 +56,7 @@ def application():
 
                 reader = easyocr.Reader(['en'])
 
+            
             # Read text from an image
                 output = reader.readtext(numplate_img)
 
@@ -63,7 +64,11 @@ def application():
                 for detection in output:
                     
                     st.subheader('Number Plate: '+ (detection[1]).upper())
-
+                    
+            with tab3:
+                st.subheader("Number plate upscaled")
+                st.image(numplate_img,use_column_width=True)
+                
 
 if __name__ == "__main__":
     application()
