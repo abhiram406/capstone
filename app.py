@@ -20,10 +20,10 @@ def application():
         opencv_image = cv2.imdecode(file_bytes, 1)
         opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 
-        sr = dnn_superres.DnnSuperResImpl.create()
-        path = 'EDSR_x4.pb'
-        sr.readModel(path)
-        sr.setModel('edsr', 4)
+        #sr = dnn_superres.DnnSuperResImpl.create()
+        #path = 'EDSR_x4.pb'
+        #sr.readModel(path)
+        #sr.setModel('edsr', 4)
         
         with tab1:
             st.subheader("Original Image")
@@ -45,21 +45,25 @@ def application():
                 #res_plotted = r[0].plot()
                 
                 numplate_img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
-                #numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
+                numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
                 #numplate_img = cv2.medianBlur(numplate_img,5)
                 
                 #norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)[1]
+                kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]]) 
+  
+                # Sharpen the image 
+                sharpened_image = cv2.filter2D(numplate_img, -1, kernel)
                 
 
-                numplate_img = sr.upsample(numplate_img)
+                #numplate_img = sr.upsample(numplate_img)
 
                 reader = easyocr.Reader(['en'])
 
             
             # Read text from an image
-                output = reader.readtext(numplate_img)
+                output = reader.readtext(sharpened_image)
 
             # Print the extracted text
                 for detection in output:
