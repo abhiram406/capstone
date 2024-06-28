@@ -56,15 +56,15 @@ def application():
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
                 
-                c1 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,1)
-                c2 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
-                c3 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,3)
-                c4 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,4)
+                c1 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,1)
+                c2 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+                c3 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,3)
+                c4 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,4)
 
-                b11 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
-                b9 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,9,2)
-                b7 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,7,2)
-                b5 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,5,2)
+                b11 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+                b9 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,9,2)
+                b7 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,7,2)
+                b5 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,5,2)
                 
                 k2 = np.ones((5,5),np.uint8)
                 opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
