@@ -1,5 +1,5 @@
 import cv2
-from cv2 import dnn_superres
+#from cv2 import dnn_superres
 import easyocr
 import streamlit as st
 import numpy as np
@@ -20,7 +20,7 @@ def application():
         opencv_image = cv2.imdecode(file_bytes, 1)
         opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 
-        sr = dnn_superres.DnnSuperResImpl_create()
+        sr = cv2.dnn_superres.DnnSuperResImpl_create()
         path = 'EDSR_x4.pb'
         sr.readModel(path)
         sr.setModel('edsr', 4)
