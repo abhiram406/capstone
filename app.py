@@ -56,6 +56,8 @@ def application():
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
                 numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,0)
+                k2 = np.ones((5,5),np.uint8)
+                opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
                 
                 #numplate_img = sr.upsample(numplate_img)
 
