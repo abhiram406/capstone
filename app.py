@@ -17,8 +17,13 @@ def application():
         # Convert the file to an opencv image.
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         opencv_image = cv2.imdecode(file_bytes, 1)
-        opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB) 
+        opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 
+        sr = cv2.dnn_superres.DnnSuperResImpl_create()
+        path = 'EDSR_x4.pb'
+        sr.readModel(path)
+        sr.setModel('edsr', 4)
+        
         with tab1:
             st.subheader("Original Image")
             st.image(opencv_image,use_column_width=True)
@@ -38,18 +43,21 @@ def application():
                 x1, y1, x2, y2 = boxes[0]
                 #res_plotted = r[0].plot()
                 
-                img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                #img = cv2.medianBlur(img,5)
+                numplate_img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
+                #numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
+                #numplate_img = cv2.medianBlur(numplate_img,5)
                 
-                norm_img = np.zeros((img.shape[0], img.shape[1]))
-                img = cv2.normalize(img, norm_img, 0, 255, cv2.NORM_MINMAX)
-                img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)[1]
+                #norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
+                #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
+                #numplate_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)[1]
+                
+
+                numplate_img = sr.upsample(numplate_img)
 
                 reader = easyocr.Reader(['en'])
 
             # Read text from an image
-                output = reader.readtext(img)
+                output = reader.readtext(numplate_img)
 
             # Print the extracted text
                 for detection in output:
