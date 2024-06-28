@@ -49,7 +49,7 @@ def application():
                 #res_plotted = r[0].plot()
                 
                 numplate_img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
-                #numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
+                numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
                 #numplate_img = cv2.medianBlur(numplate_img,3)
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
