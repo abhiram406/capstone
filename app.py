@@ -20,6 +20,10 @@ def application():
         opencv_image = cv2.imdecode(file_bytes, 1)
         opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 
+        # Sharpen the image
+        kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+        opencv_image = cv2.filter2D(opencv_image, -1, kernel)
+
         #sr = dnn_superres.DnnSuperResImpl.create()
         #path = 'EDSR_x4.pb'
         #sr.readModel(path)
@@ -51,15 +55,8 @@ def application():
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
-                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,20,2)
                 
-                 
-  
-                # Sharpen the image
-                kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
-                sharpened_image = cv2.filter2D(numplate_img, -1, kernel)
-                
-
                 #numplate_img = sr.upsample(numplate_img)
 
                 reader = easyocr.Reader(['en'])
