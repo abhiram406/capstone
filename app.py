@@ -54,21 +54,13 @@ def application():
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
-                #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
+                numplate_img = cv2.threshold(numplate_img, 100, 255, cv2.THRESH_BINARY)[1]
                 
-                c1 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,17,4)
-                c2 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,17,5)
-                c3 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,17,6)
-                c4 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,17,7)
-
-                b11 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,19,4)
-                b9 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,19,5)
-                b7 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,19,6)
-                b5 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,19,7)
 
                 
                 k2 = np.ones((5,5),np.uint8)
                 opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
+                closing = cv2.morphologyEx(numplate_img, cv2.MORPH_CLOSE, k2)
                 
                 #numplate_img = sr.upsample(numplate_img)
 
@@ -87,14 +79,9 @@ def application():
             with tab3:
                 st.subheader("Number plate upscaled")
                 st.image(numplate_img,use_column_width=True)
-                st.image(c1,use_column_width=True)
-                st.image(c2,use_column_width=True)
-                st.image(c3,use_column_width=True)
-                st.image(c4,use_column_width=True)
-                st.image(b11,use_column_width=True)
-                st.image(b9,use_column_width=True)
-                st.image(b7,use_column_width=True)
-                st.image(b5,use_column_width=True)
+                st.image(opening,use_column_width=True)
+                st.image(closing,use_column_width=True)
+                
                 
 
 if __name__ == "__main__":
