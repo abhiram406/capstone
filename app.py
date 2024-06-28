@@ -49,7 +49,7 @@ def application():
                 #numplate_img = cv2.medianBlur(numplate_img,5)
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
-                numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
+                #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
                 
                  
