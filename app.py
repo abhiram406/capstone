@@ -22,7 +22,7 @@ def application():
 
         # Sharpen the image
         kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
-        opencv_image = cv2.filter2D(opencv_image, -1, kernel)
+        #opencv_image = cv2.filter2D(opencv_image, -1, kernel)
 
         #sr = dnn_superres.DnnSuperResImpl.create()
         #path = 'EDSR_x4.pb'
@@ -55,7 +55,17 @@ def application():
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
-                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,0)
+                
+                c1 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,1)
+                c2 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+                c3 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,3)
+                c4 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,4)
+
+                b11 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+                b9 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,9,2)
+                b7 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,7,2)
+                b5 = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,5,2)
+                
                 k2 = np.ones((5,5),np.uint8)
                 opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
                 
@@ -75,7 +85,14 @@ def application():
                     
             with tab3:
                 st.subheader("Number plate upscaled")
-                st.image(numplate_img,use_column_width=True)
+                st.image(c1,use_column_width=True)
+                st.image(c2,use_column_width=True)
+                st.image(c3,use_column_width=True)
+                st.image(c4,use_column_width=True)
+                st.image(b11,use_column_width=True)
+                st.image(b9,use_column_width=True)
+                st.image(b7,use_column_width=True)
+                st.image(b5,use_column_width=True)
                 
 
 if __name__ == "__main__":
