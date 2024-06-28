@@ -55,7 +55,7 @@ def application():
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
-                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,0)
+                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,0)
                 k2 = np.ones((5,5),np.uint8)
                 opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
                 
