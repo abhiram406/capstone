@@ -50,12 +50,12 @@ def application():
                 
                 numplate_img = opencv_image[int(y1):int(y2), int(x1):int(x2)]
                 numplate_img = cv2.cvtColor(numplate_img, cv2.COLOR_BGR2GRAY)
-                #numplate_img = cv2.medianBlur(numplate_img,5)
+                numplate_img = cv2.medianBlur(numplate_img,2)
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
                 #numplate_img = cv2.threshold(numplate_img, 127, 255, cv2.THRESH_BINARY)[1]
-                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,3)
+                numplate_img = cv2.adaptiveThreshold(numplate_img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,1)
                 
                 #numplate_img = sr.upsample(numplate_img)
 
