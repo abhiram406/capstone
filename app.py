@@ -54,14 +54,8 @@ def application():
                 
                 norm_img = np.zeros((numplate_img.shape[0], numplate_img.shape[1]))
                 #numplate_img = cv2.normalize(numplate_img, norm_img, 0, 255, cv2.NORM_MINMAX)
-                numplate_img = cv2.threshold(numplate_img, 100, 255, cv2.THRESH_BINARY)[1]
-                
-
-                
-                k2 = np.ones((5,5),np.uint8)
-                opening = cv2.morphologyEx(numplate_img, cv2.MORPH_OPEN, k2)
-                closing = cv2.morphologyEx(numplate_img, cv2.MORPH_CLOSE, k2)
-                
+                #numplate_img = cv2.threshold(numplate_img, 0, 255, cv2.THRESH_BINARY)[1]
+              
                 #numplate_img = sr.upsample(numplate_img)
 
                 reader = easyocr.Reader(['en'])
@@ -79,8 +73,6 @@ def application():
             with tab3:
                 st.subheader("Number plate upscaled")
                 st.image(numplate_img,use_column_width=True)
-                st.image(opening,use_column_width=True)
-                st.image(closing,use_column_width=True)
                 
                 
 
