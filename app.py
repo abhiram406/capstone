@@ -33,7 +33,7 @@ def application():
             st.subheader("Original Image")
             st.image(opencv_image,use_column_width=True)
         
-        model = YOLO('best.pt')
+        model = YOLO('best_v2.pt')
 
         result = model.predict(opencv_image)
         boxes = result[0].boxes.xyxy.tolist()
