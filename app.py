@@ -4,6 +4,7 @@ import easyocr
 import streamlit as st
 import numpy as np
 from ultralytics import YOLO
+from pathlib import Path
 
 def application():
     st.header('Automatic Number Plate Detection')
