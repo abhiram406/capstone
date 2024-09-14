@@ -8,13 +8,15 @@ from ultralytics import YOLO
 def application():
     st.header('Automatic Number Plate Detection')
     st.subheader('AIML Capstone Project - Group 3')
-    st.write('Instructions: Please upload images of cars in the given link and switch through the tabs to check if the number plate gets detected')
+    st.write('Instructions: Please upload images or videos in the given link and switch through the tabs to check if a number plate gets detected')
 
-    uploaded_file = st.file_uploader(label="Choose an image file",type=['png', 'jpg', 'jpeg'])
+    uploaded_file = st.file_uploader(label="Choose a file",type=['png', 'jpg', 'jpeg'])
     
     tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
     
     if uploaded_file:
+        suffix = Path(uploaded_file.name).suffix
+        st.write('Suffix is' + suffix)
         # Convert the file to an opencv image.
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         opencv_image = cv2.imdecode(file_bytes, 1)
