@@ -79,18 +79,10 @@ def application():
          
         else:
             
-            
-            tfile = NamedTemporaryFile(delete=False)
-            tfile.write(uploaded_file.read())
-            vf = cv2.VideoCapture(tfile.name)
             with tab1:
-                st.subheader("Original Image")
+                st.subheader("Original Video")
                 st.video(uploaded_file,use_column_width=True)
             
-            model = YOLO('best_v2.pt')
-    
-            result_vid = model.predict(vf)
-            boxes = result[0].boxes.xyxy.tolist()
             
                     
 
