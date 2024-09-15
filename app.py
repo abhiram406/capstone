@@ -84,8 +84,19 @@ def application():
                 file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
                 
                 st.video(file_bytes)
+                opencv_image = cv2.imdecode(file_bytes, 1)
+                opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
+
+            model = YOLO('best_v2.pt')
+    
+            result = model.predict(opencv_image)
+            boxes = result[0].boxes.xyxy.tolist()
             
-            
+            with tab2:
+                st.subheader("Original Video with Detected Number Plates")
+                st.video(r.plot(),use_column_width=True)
+
+
                     
 
 if __name__ == "__main__":
