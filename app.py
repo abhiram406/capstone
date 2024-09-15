@@ -81,7 +81,7 @@ def application():
             
             with tab1:
                 st.subheader("Original Video")
-                st.video(uploaded_file,use_column_width=True)
+                st.write(type(uploaded_file))
             
             
                     
