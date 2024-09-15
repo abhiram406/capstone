@@ -6,3 +6,4 @@ opencv-contrib-python-headless
 pytesseract==0.3.10
 streamlit==1.35.0
 ultralytics==8.2.36
+tempfile
