@@ -83,13 +83,14 @@ def application():
             
             tfile = tempfile.NamedTemporaryFile(delete=False)
             tfile.write(uploaded_file.read())
+            vf = cv.VideoCapture(tfile.name)
             with tab1:
                 st.subheader("Original Image")
-                st.video(tfile,use_column_width=True)
+                st.video(vf,use_column_width=True)
             
             model = YOLO('best_v2.pt')
     
-            result_vid = model.predict(tfile)
+            result_vid = model.predict(vf)
             boxes = result[0].boxes.xyxy.tolist()
             
                     
