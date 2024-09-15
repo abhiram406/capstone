@@ -80,22 +80,18 @@ def application():
          
         else:
             
-            tfile = tempfile.NamedTemporaryFile(delete=False) 
+            
+            tfile = tempfile.NamedTemporaryFile(delete=False)
             tfile.write(uploaded_file.read())
+            with tab1:
+                st.subheader("Original Image")
+                st.video(tfile,use_column_width=True)
             
+            model = YOLO('best_v2.pt')
+    
+            result_vid = model.predict(tfile)
+            boxes = result[0].boxes.xyxy.tolist()
             
-            vf = cv.VideoCapture(tfile.name)
-            
-            stframe = st.empty()
-            
-            while vf.isOpened():
-                ret, frame = vf.read()
-                # if frame is read correctly ret is True
-                if not ret:
-                    print("Can't receive frame (stream end?). Exiting ...")
-                    break
-                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                stframe.image(gray)
                     
 
 if __name__ == "__main__":
