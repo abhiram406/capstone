@@ -85,7 +85,7 @@ def application():
             vf = cv2.VideoCapture(tfile.name)
             with tab1:
                 st.subheader("Original Image")
-                st.video(vf,use_column_width=True)
+                st.video(uploaded_file,use_column_width=True)
             
             model = YOLO('best_v2.pt')
     
