@@ -82,7 +82,7 @@ def application():
             
             tfile = NamedTemporaryFile(delete=False)
             tfile.write(uploaded_file.read())
-            vf = cv.VideoCapture(tfile.name)
+            vf = cv2.VideoCapture(tfile.name)
             with tab1:
                 st.subheader("Original Image")
                 st.video(vf,use_column_width=True)
