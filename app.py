@@ -81,7 +81,7 @@ def application():
         else:
             
             
-            tfile = tempfile.NamedTemporaryFile(delete=False)
+            tfile = NamedTemporaryFile(delete=False)
             tfile.write(uploaded_file.read())
             vf = cv.VideoCapture(tfile.name)
             with tab1:
