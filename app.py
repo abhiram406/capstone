@@ -81,7 +81,9 @@ def application():
             
             with tab1:
                 st.subheader("Original Video")
-                st.write(type(uploaded_file))
+                file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+                
+                st.video(file_bytes)
             
             
                     
