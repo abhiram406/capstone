@@ -84,17 +84,37 @@ def application():
                 file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
                 
                 st.video(file_bytes)
-                opencv_image = cv2.imdecode(file_bytes, 1)
-                #opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
+                opencv_video = cv2.imdecode(file_bytes, 1)
+                
 
             model = YOLO('best_v2.pt')
-    
-            result = model.predict(opencv_image)
-            boxes = result[0].boxes.xyxy.tolist()
+            
+            success,image = opencv_video.read()
+            fps = opencv_video.get(cv2.CAP_PROP_FPS)
+            
+            
+            count = 0
+            success = True
+            im_frames = []
+            while success:
+                success,image = opencv_video.read()
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                count += 1
+                frame = model.predict(opencv_frame)
+                im_frames.append(frame)
+
+            fourcc = cv2.VideoWriter_fourcc(*'h264')
+            out = cv2.VideoWriter('detected_video.mp4',fourcc, 25, size)
+
+            for i in range(len(im_frames)):
+                out.write(im_frames[i])
+            out.release()
+            
             
             with tab2:
+                vidcap = cv2.VideoCapture("detected_video.mp4")
                 st.subheader("Original Video with Detected Number Plates")
-                st.video(result.plot(),use_column_width=True)
+                st.video(vidcap.plot(),use_column_width=True)
 
 
                     
