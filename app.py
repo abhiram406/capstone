@@ -85,7 +85,7 @@ def application():
                 
                 st.video(file_bytes)
                 opencv_image = cv2.imdecode(file_bytes, 1)
-                opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
+                #opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 
             model = YOLO('best_v2.pt')
     
