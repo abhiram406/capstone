@@ -94,7 +94,7 @@ def application():
             
             with tab2:
                 st.subheader("Original Video with Detected Number Plates")
-                st.video(r.plot(),use_column_width=True)
+                st.video(result.plot(),use_column_width=True)
 
 
                     
