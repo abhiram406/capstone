@@ -11,7 +11,7 @@ def application():
     st.subheader('AIML Capstone Project - Group 3')
     st.write('Instructions: Please upload images or videos in the given link and switch through the tabs to check if a number plate gets detected')
 
-    uploaded_file = st.file_uploader(label="Choose a file",type=['png', 'jpg', 'jpeg','mp4'])
+    uploaded_file = st.file_uploader(label="Choose a file",type=['png', 'jpg', 'jpeg'])
     
     tab1, tab2, tab3 = st.tabs(["Original", "Detected", "Number Plate"])
     
